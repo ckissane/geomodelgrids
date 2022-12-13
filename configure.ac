@@ -5,9 +5,9 @@
 #
 # ----------------------------------------------------------------------
 
-AC_PREREQ(2.59)
-AC_INIT([geomodelgrids], [1.0.0rc2], [baagaard@usgs.gov])
-AC_CONFIG_HEADER([portinfo])
+AC_PREREQ([2.71])
+AC_INIT([geomodelgrids],[1.0.0rc2],[baagaard@usgs.gov])
+AC_CONFIG_HEADERS([portinfo])
 AC_CONFIG_AUX_DIR([./aux-config])
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([foreign subdir-objects tar-pax])
@@ -40,8 +40,7 @@ AC_ARG_ENABLE([test-coverage],
 	[if test "$enableval" = yes ; then enable_test_coverage=yes; else enable_test_coverage=no; fi],
 	[enable_test_coverage=no])
 AC_ARG_WITH([python-coverage],
-    [AC_HELP_STRING([--with-python-coverage],
-        [Specify executable for python-coverage @<:@default=python3-coverage@:>@])],
+    [AS_HELP_STRING([--with-python-coverage],[Specify executable for python-coverage @<:@default=python3-coverage@:>@])],
 	[python_coverage=$withval],
 	[python_coverage="python3-coverage"])
 AC_SUBST(python_coverage)
@@ -65,56 +64,48 @@ AC_ARG_ENABLE([spatialdata],
 # ----------------------------------------------------------------------
 # CPPUNIT
 AC_ARG_WITH([cppunit-incdir],
-    [AC_HELP_STRING([--with-cppunit-incdir],
-        [Specify location of cppunit header files @<:@default=no@:>@])],
+    [AS_HELP_STRING([--with-cppunit-incdir],[Specify location of cppunit header files @<:@default=no@:>@])],
 	[with_cppunit_incdir=$withval],
 	[with_cppunit_incdir=no])
 AC_SUBST(with_cppunit_incdir)
 AC_ARG_WITH([cppunit-libdir],
-    [AC_HELP_STRING([--with-cppunit-libdir],
-        [Specify location of cppunit library @<:@default=no@:>@])],
+    [AS_HELP_STRING([--with-cppunit-libdir],[Specify location of cppunit library @<:@default=no@:>@])],
 	[with_cppunit_libdir=$withval],
 	[with_cppunit_libdir=no])
 AC_SUBST(with_cppunit_libdir)
 
 # PROJ
 AC_ARG_WITH([proj-incdir],
-    [AC_HELP_STRING([--with-proj-incdir],
-        [Specify location of proj header files @<:@default=no@:>@])],
+    [AS_HELP_STRING([--with-proj-incdir],[Specify location of proj header files @<:@default=no@:>@])],
 	[with_proj_incdir=$withval],
 	[with_proj_incdir=no])
 AC_SUBST(with_proj_incdir)
 AC_ARG_WITH([proj-libdir],
-    [AC_HELP_STRING([--with-proj-libdir],
-        [Specify location of proj library @<:@default=no@:>@])],
+    [AS_HELP_STRING([--with-proj-libdir],[Specify location of proj library @<:@default=no@:>@])],
 	[with_proj_libdir=$withval],
 	[with_proj_libdir=no])
 AC_SUBST(with_proj_libdir)
 
 # HDF5
 AC_ARG_WITH([hdf5-incdir],
-    [AC_HELP_STRING([--with-hdf5-incdir],
-        [Specify location of hdf5 header files @<:@default=no@:>@])],
+    [AS_HELP_STRING([--with-hdf5-incdir],[Specify location of hdf5 header files @<:@default=no@:>@])],
 	[with_hdf5_incdir=$withval],
 	[with_hdf5_incdir=no])
 AC_SUBST(with_hdf5_incdir)
 AC_ARG_WITH([hdf5-libdir],
-    [AC_HELP_STRING([--with-hdf5-libdir],
-        [Specify location of hdf5 library @<:@default=no@:>@])],
+    [AS_HELP_STRING([--with-hdf5-libdir],[Specify location of hdf5 library @<:@default=no@:>@])],
 	[with_hdf5_libdir=$withval],
 	[with_hdf5_libdir=no])
 AC_SUBST(with_hdf5_libdir)
 
 # GDAL
 AC_ARG_WITH([gdal-incdir],
-    [AC_HELP_STRING([--with-gdal-incdir],
-        [Specify location of gdal header files @<:@default=no@:>@])],
+    [AS_HELP_STRING([--with-gdal-incdir],[Specify location of gdal header files @<:@default=no@:>@])],
 	[with_gdal_incdir=$withval],
 	[with_gdal_incdir=no])
 AC_SUBST(with_gdal_incdir)
 AC_ARG_WITH([gdal-libdir],
-    [AC_HELP_STRING([--with-gdal-libdir],
-        [Specify location of gdal library @<:@default=no@:>@])],
+    [AS_HELP_STRING([--with-gdal-libdir],[Specify location of gdal library @<:@default=no@:>@])],
 	[with_gdal_libdir=$withval],
 	[with_gdal_libdir=no])
 AC_SUBST(with_gdal_libdir)
@@ -124,14 +115,14 @@ AC_SUBST(with_gdal_libdir)
 # ----------------------------------------------------------------------
 AC_PROG_CXX
 AC_PROG_CC
-AC_PROG_LIBTOOL
+LT_INIT
 AC_PROG_INSTALL
 
 # Require C++-11
 AX_CXX_COMPILE_STDCXX(11)
 
 
-AC_PROG_LIBTOOL
+LT_INIT
 if test "$allow_undefined_flag" = unsupported; then
     # See issue119.
     AM_LDFLAGS="-no-undefined $AM_LDFLAGS"
@@ -187,9 +178,9 @@ fi
 # Python
 if test "$enable_python" = "yes" ; then
   # PYTHON
-  m4_define_default([_AM_PYTHON_INTERPRETER_LIST],[python3 python3.7 python3.8 python3.9])
-  AM_PATH_PYTHON([3.7])
-  CIT_PYTHON_SYSCONFIG
+  m4_define_default([_AM_PYTHON_INTERPRETER_LIST],[python3 python3.10 python3.9 python3.8 python3.7])
+  AM_PATH_PYTHON([3.10])
+  # CIT_PYTHON_SYSCONFIG
 
   # NUMPY
   CIT_NUMPY_PYTHON_MODULE

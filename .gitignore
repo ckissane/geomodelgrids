@@ -22,3 +22,25 @@ lt~obsolete.m4
 m4/libtool.m4
 portinfo.in
 record.txt
+
+# ckissane after configure
+
+config.status
+libtool
+portinfo
+stamp-h1
+
+*.Po
+*.Plo
+Makefile
+
+# more to ignore on make
+
+*.o
+**/.libs/*
+*.lo
+.dirstamp
+libsrc/geomodelgrids/libgeomodelgrids.la
+examples/cxx-api/query
+examples/c-api/query
+bin/*

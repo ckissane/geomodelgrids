@@ -8,6 +8,18 @@
 
 Georeferenced grid-based Earth models composed of blocks with different grid resolutions.
 
+## Rough Setup
+
+```
+libtoolize --force
+aclocal
+autoheader
+automake --force-missing --add-missing
+autoconf
+./configure --enable-python # (or what have you)
+make
+```
+
 ## Documentation
 
 [Online Documentation](https://geomodelgrids.readthedocs.io)
